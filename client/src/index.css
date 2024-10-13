@@ -1,0 +1,64 @@
+:root {
+  --color1: #1c1c1c;
+  --color2: #DADDD8;
+  --color3: #ECEBE4;
+  --color4: #EEF0F2;
+  --color5: #EEF0F2;
+  --save: #5CB85C;
+  --delete: #D9534F;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color5);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.main-content-view{
+  margin: 1rem;
+  padding-left: 3rem;
+  width: calc(100% - 3rem);
+  height: calc(100vh - 3.4rem);
+  overflow-y: auto;
+}
+
+.main-content{
+  margin: 1rem;
+  padding-left: 0rem !important;
+  width: calc(100% - 2rem);
+  height: calc(100vh - 6rem);
+}
+
+.custom-button {
+  background-color: var(--color2);
+  color: var(--color1);
+  border: none;
+}
+
+.adminDeleteBtn{
+  background-color: #D9534F !important;
+  width: fit-content !important;
+  pointer-events: all;
+}

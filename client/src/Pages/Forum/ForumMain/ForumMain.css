@@ -1,0 +1,20 @@
+.forummain{
+    height: calc(100% - 1rem);
+    width: 100%;
+}
+
+.forummain .filterpanel{
+    padding-left: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.forummain .filterpanel .input{
+    width: 50%;
+}
+
+.forummain .allThreads{
+    padding-left: 1rem;
+}

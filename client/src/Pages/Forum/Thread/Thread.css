@@ -1,0 +1,58 @@
+.thread {
+    margin-top: 2rem;
+    margin-right: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.thread textarea{
+    pointer-events: none;
+    user-select: none;
+    height: fit-content;
+}
+
+.thread-subject {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    pointer-events: none;
+    user-select: none;
+}
+
+.threadtype-info h1{
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    user-select: none;
+}
+.threadtype-info h4 {
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    font-weight:normal;
+    pointer-events: none;
+    user-select: none;
+}
+
+.comments-container{
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    padding-top: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-input{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment-input textarea{
+    width: 90%;
+}

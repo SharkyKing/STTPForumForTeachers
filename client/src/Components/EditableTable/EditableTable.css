@@ -1,0 +1,42 @@
+.editable-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.editable-table th,
+.editable-table td {
+    border: 1px solid #ddd;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 1rem;
+    text-align: left;
+    height: 2.5rem;
+    width: 150px;
+}
+
+.editable-table th {
+    background-color: #f2f2f2;
+    padding-left: 1rem;
+}
+
+.editable-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.editable-table input {
+    width: calc(100% - 2rem);
+    height: 2rem;
+}
+
+.editable-table button {
+    width: calc(100% - 2rem);
+    height: 2rem;
+}
+
+.editable-table button.delete {
+    background-color: var(--delete);
+}
+
+.editable-table button.save {
+    background-color: var(--save);
+}

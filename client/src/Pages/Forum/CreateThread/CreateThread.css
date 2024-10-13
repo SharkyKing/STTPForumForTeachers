@@ -1,0 +1,13 @@
+.createthread{
+    margin-top: 2rem;
+    margin-right: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.createthread-subject{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}

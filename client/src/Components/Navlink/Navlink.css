@@ -1,0 +1,28 @@
+.navlink {
+    background-color: var(--color2);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: black;
+    text-decoration: none;
+    width: 100%;
+}
+
+.navlink:hover {
+    background-color: var(--color3);
+}
+
+.navlink-text{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.navlink-icon{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

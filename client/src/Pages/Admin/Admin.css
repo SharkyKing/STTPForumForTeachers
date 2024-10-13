@@ -1,0 +1,27 @@
+.admin-container{
+    margin: 1rem;
+    width: 100%;
+    height: calc(100% - 1rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-container .grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-content: center;
+}
+
+.grid .grid-item .button{
+    width: 20rem;
+    height: 10rem;
+}
+
+.grid .grid-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

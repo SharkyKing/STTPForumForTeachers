@@ -1,0 +1,42 @@
+.sidepanel{
+    background-color: var(--color1);
+    height: 100vh;
+    width: 3rem;
+    transition: 0.4s;
+    overflow: hidden;
+    position: absolute;
+}
+
+.sidepanel:hover{
+    width: 15rem;
+}
+
+.sidepanel .navlink .navlink-text {
+    visibility: hidden;
+    transition: visibility 0s 0.2s;
+}
+
+.sidepanel:hover .navlink .navlink-text {
+    visibility: visible;
+    transition: visibility 0s 0s;
+}
+
+.sidepanel:hover .navlink .navlink-icon {
+    width: 10%;
+}
+
+.sidepanel .navlinks{
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.navlinks .navlink{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
