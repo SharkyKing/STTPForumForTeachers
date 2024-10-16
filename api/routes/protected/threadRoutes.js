@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Thread, Category, Grade, User, ThreadVote, Comment } = require('../../models');
 const authenticateJWT = require('../../middlewares/authMiddleware');
+const { Op } = require('sequelize');
 
 // POST route to create a new thread
 router.post('/', authenticateJWT, async (req, res) => {
@@ -120,21 +121,7 @@ router.post('/vote/:threadId', authenticateJWT, async (req, res) => {
 });
 
 
-router.get('/', authenticateJWT, async (req, res) => {
-    try {
-        const ThreadsAll = await Thread.findAll({
-            include: [
-                { model: Category, attributes: ['CategoryName'] },
-                { model: Grade, attributes: ['GradeName'] }
-            ]
-        });
 
-        res.status(200).json(ThreadsAll);
-    } catch (error) {
-        console.error('Error fetching user threads:', error);
-        res.status(500).json({ error: "An error occurred while fetching threads." });
-    }
-});
 
 router.get('/:id', authenticateJWT, async (req, res) => {
     const threadId = req.params.id;
@@ -182,6 +169,30 @@ router.get('/:threadId/comment', async (req, res) => {
     } catch (error) {
         console.error('Error fetching comments:', error);
         res.status(500).json({ error: "An error occurred while fetching comments." });
+    }
+});
+
+router.delete('/:id', authenticateJWT, async (req, res) => {
+    const threadId = req.params.id;
+    const userId = req.user.id;  
+
+    try {
+        const thread = await Thread.findOne({
+            where: {
+                id: threadId
+            }
+        });
+
+        if (!thread) {
+            return res.status(404).json({ error: "Thread not found or you are not the owner of this thread." });
+        }
+
+        await thread.destroy();
+
+        res.status(200).json({ message: "Thread deleted successfully." });
+    } catch (error) {
+        console.error("Error deleting thread:", error);
+        res.status(500).json({ error: "An error occurred while deleting the thread." });
     }
 });
 

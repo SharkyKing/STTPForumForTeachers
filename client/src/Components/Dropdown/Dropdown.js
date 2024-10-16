@@ -5,12 +5,16 @@ const Dropdown = ({ options, setSelectedValue, defaultLabel='Select an option', 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
+    const extendedOptions = Array.isArray(options) 
+        ? [{ id: 0, [labelKey]: 'All' }, ...options] 
+        : [];
+
      useEffect(() => {
         if (selectedOptionExternal) {
             setSelectedOption(selectedOptionExternal);
             setSelectedValue(selectedOptionExternal.id);
         } else if (selectedValueExternal) {
-            const matchedOption = options.find(option => option[labelKey] === selectedValueExternal);
+            const matchedOption = extendedOptions.find(option => option[labelKey] === selectedValueExternal);
             if (matchedOption) {
                 setSelectedOption(matchedOption);
                 setSelectedValue(matchedOption.id); 
@@ -35,7 +39,7 @@ const Dropdown = ({ options, setSelectedValue, defaultLabel='Select an option', 
             </div>
             {isOpen && (
                 <div className="dropdown-list">
-                    {options.map((option) => (
+                    {extendedOptions.map((option) => (
                         <div
                             key={option.id}
                             className="dropdown-item"

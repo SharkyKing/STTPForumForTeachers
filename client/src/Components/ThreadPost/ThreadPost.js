@@ -4,9 +4,9 @@ import { FaArrowUp, FaArrowDown} from 'react-icons/fa';
 import EndPoint from '../../Endpoint';
 import {useAuth } from '../../Auth/AuthContext'
 
-const ThreadPost = ({ thread, navigate }) => {
+const ThreadPost = ({ thread, navigate, OnDelete }) => {
     const [currentVotes, setCurrentVotes] = useState(thread.RelevancyCount);
-    const { userData } = useAuth();
+    const { isAdmin, alertMessage } = useAuth();
 
     const handelVote = async (vote) => {
         try {
@@ -27,17 +27,32 @@ const ThreadPost = ({ thread, navigate }) => {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            const response = await EndPoint.Api.deleteRequest(EndPoint.Api.ApiPaths.thread.byID(thread.id), { withCredentials: true }, navigate);
+            
+            if (response.status === 200) {
+                alertMessage("Thread deleted successfully.", true);
+                OnDelete();
+            } else if (response.error) {
+                alertMessage('Failed to delete thread')
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    };
+
     return (
         <div className="post">
             <div className="header">
-                <div className="header-user">
-                    {thread.Grade.GradeName} - {thread.Category.CategoryName}
-                </div>
-                {userData.role == 2 ? (
-                <EndPoint.components.Button className={"adminDeleteBtn"}>Delete</EndPoint.components.Button>
+                {isAdmin ? (
+                <EndPoint.components.Button onClick={handleDelete} className={"adminDeleteBtn"}>Delete</EndPoint.components.Button>
                 ) : (null)
                 
                 }
+                <div className="header-user">
+                    {thread.Grade.GradeName} - {thread.Category.CategoryName}
+                </div>
             </div>
 
             <div className="threadname">

@@ -13,9 +13,12 @@ const handleAuthCheck = (response, navigate) => {
     }
 };
 
-export const getRequest = async (path, config = {}, navigate) => {
+export const getRequest = async (path, config = {}, navigate, queryParams) => {
     try {
-        const response = await apiClient.get(`${path}`, config);
+        const queryString = new URLSearchParams(queryParams).toString();
+        const requestUrl = queryString ? `${path}?${queryString}` : path;
+        console.log(requestUrl)
+        const response = await apiClient.get(`${requestUrl}`, config);
         if(navigate) {handleAuthCheck(response, navigate);}
         return { data: response.data, error: null, status: response.status };
     } catch (error) {

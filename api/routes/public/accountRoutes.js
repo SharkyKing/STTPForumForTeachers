@@ -70,7 +70,7 @@ router.post("/logout", authenticateJWT, (req, res) => {
     res.json({ message: 'Logged out successfully' });
 });
 
-router.get("/auth", authenticateJWT, (req, res) => {
+router.get("/auth", authenticateJWT,async (req, res) => {
     res.json({ message: 'User is authenticated', user: req.user });
 });
 

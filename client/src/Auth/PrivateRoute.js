@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import EndPoint from '../Endpoint';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
@@ -7,9 +8,11 @@ const PrivateRoute = ({ children, id }) => {
   const location = useLocation();
   const [authChecked, setAuthChecked] = useState(false);
   const [idCurrent, setIdCurrent] = useState(id);
+  const [oldID, setOldId] = useState(null);
 
   useEffect(() => {
-    if(id !== idCurrent){
+    if(id !== idCurrent || !oldID){
+      setOldId(idCurrent);
       setAuthChecked(false);
       setIdCurrent(id)
 
@@ -18,14 +21,14 @@ const PrivateRoute = ({ children, id }) => {
         setAuthChecked(true);
       };
     
-    checkAuthentication();
+      checkAuthentication();
     }
 
   }, [location.pathname,id ,idCurrent ,checkAuth]);
 
   if ((loading || !authChecked) || (id !== idCurrent)) {
     
-    return <h1>LOADING...</h1>;
+    return <EndPoint.panels.Loading/>;
   }
 
   return isAuth ? children : <Navigate to="/" />; 

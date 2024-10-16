@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [userData, setUser] = useState();
     const [loading, setLoading] = useState(true);
     const [isAuth, setIsAuth] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const checkAuth = useCallback(async () => {
         try {
@@ -21,6 +22,12 @@ export const AuthProvider = ({ children }) => {
             if (response.status === 200) {
                 setIsAuth(true);
                 setUser(response.data.user);
+                if(response.data.user.RoleID === 1){
+                    setIsAdmin(true);
+                }
+                else{
+                    setIsAdmin(false)
+                }
             }
             else{
                 setIsAuth(false);
@@ -33,7 +40,7 @@ export const AuthProvider = ({ children }) => {
         } finally {
             setTimeout(() => {
                 setLoading(false);
-            }, 500)
+            }, 2000)
         }
     }, [navigate]);
 
@@ -76,7 +83,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuth, login, logout, alertMessage, loading, checkAuth, userData }}>
+        <AuthContext.Provider value={{ isAuth, login, logout, alertMessage, loading, checkAuth, userData, isAdmin}}>
             {children}
         </AuthContext.Provider>
     );

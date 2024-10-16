@@ -93,6 +93,10 @@ function Thread() {
         return <div>Loading...</div>; // Show a loading state while fetching the thread data
     }
 
+    const OnDelete = () => {
+        fetchComments();
+    }
+
     return (
        <EndPoint.Utility.Other.LoadableComponent loading={!threadData}>
             <div className="thread">
@@ -122,7 +126,7 @@ function Thread() {
 
             <div className="comments-container">
                 {comments && comments.map(comment => (
-                    <EndPoint.components.Comment key={comment.id} commentData={comment} />
+                    <EndPoint.components.Comment  OnDelete={OnDelete} key={comment.id} commentData={comment} />
                 ))}
 
                 <div className="comment-input">

@@ -1,26 +1,22 @@
-// routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
-const { User, Role } = require('../../models'); // Import the User model
+const { User, Role } = require('../../models'); 
 const db = require('../../models');
-const authenticateJWT = require('../../middlewares/authMiddleware'); // Middleware for JWT authentication
-const { where } = require('sequelize');
+const authenticateJWT = require('../../middlewares/authMiddleware'); 
 
-// Route to get a user by ID
 router.get('/:id', authenticateJWT, async (req, res) => {
     const userId = req.params.id;
 
     try {
-        // Fetch user from database
         const user = await User.findByPk(userId, {
-            attributes: { exclude: ['Password'] } // Exclude sensitive fields like Password
+            attributes: { exclude: ['Password'] }
         });
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        res.status(200).json(user); // Send user data back to the client
+        res.status(200).json(user);
     } catch (error) {
         console.error('Error fetching user:', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -29,25 +25,22 @@ router.get('/:id', authenticateJWT, async (req, res) => {
 
 router.patch('/:id', authenticateJWT, async (req, res) => {
     const userId = req.params.id;
-    const updateData = req.body; // The data to update
+    const updateData = req.body; 
 
     try {
-        // Find the user first
         const user = await User.findByPk(userId);
         
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Update the user
-        await user.update(updateData); // Use Sequelize's update method
+        await user.update(updateData); 
 
-        // Optionally, exclude sensitive fields when sending the response back
         const updatedUser = await User.findByPk(userId, {
-            attributes: { exclude: ['Password'] } // Exclude sensitive fields
+            attributes: { exclude: ['Password'] } 
         });
 
-        res.status(200).json(updatedUser); // Send updated user data back to the client
+        res.status(200).json(updatedUser); 
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -69,7 +62,7 @@ router.get('/', authenticateJWT, async (req, res) => {
                 ]
             },
             where: {
-                id: { [db.Sequelize.Op.ne]: req.user.id }  // Exclude the current user (not equal operator)
+                id: { [db.Sequelize.Op.ne]: req.user.id }
             }
         });
 

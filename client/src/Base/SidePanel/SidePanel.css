@@ -5,6 +5,7 @@
     transition: 0.4s;
     overflow: hidden;
     position: absolute;
+    z-index: 100;
 }
 
 .sidepanel:hover{

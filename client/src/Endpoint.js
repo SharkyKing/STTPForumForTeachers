@@ -30,6 +30,7 @@ import { validateSignUpForm, initialRegisterFormState, initialLoginFormState, va
 import LoadableComponent from './Utility/LoadableComponent';
 //Panels
 import PageHeaderPanel from './Panels/PageHeaderPanel/PageHeaderPanel';
+import Loading from './Panels/Loading/Loading';
 
 const EndPoint = {
   "path":{
@@ -68,7 +69,7 @@ const EndPoint = {
     getRequest, putRequest, deleteRequest, postRequest, ApiPaths, patchRequest
   },
   "panels": {
-    PageHeaderPanel
+    PageHeaderPanel, Loading
   }
 };
 

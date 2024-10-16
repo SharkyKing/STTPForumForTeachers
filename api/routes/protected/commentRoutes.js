@@ -39,12 +39,6 @@ router.patch('/:commentId', authenticateJWT, async (req, res) => {
             return res.status(404).json({ error: "Comment not found." });
         }
 
-        // Optionally, you can check if the user is authorized to update this comment
-        // if (comment.UserID !== req.user.id) {
-        //     return res.status(403).json({ error: "You are not authorized to update this comment." });
-        // }
-
-        // Update the comment text if provided
         if (CommentText) {
             comment.CommentText = CommentText;
             await comment.save();
@@ -57,7 +51,6 @@ router.patch('/:commentId', authenticateJWT, async (req, res) => {
     }
 });
 
-// DELETE route to delete a comment
 router.delete('/:commentId', authenticateJWT, async (req, res) => {
     const { commentId } = req.params;
 
